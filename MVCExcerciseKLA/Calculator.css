@@ -1,0 +1,107 @@
+﻿
+header{
+    width:100%;
+    margin:0 auto;
+}
+body {
+    background-color: #E8DDDD;
+    font-family: Verdana;
+    color: #6f6969;
+    padding:0px;
+    margin:0px;
+}
+
+#explanation{
+margin:15px;
+}
+#mainDiv{
+    margin: 0 auto; 
+    width:50%;
+}
+header{
+    font-size:x-large;
+    background-color:#C8BDBD;
+    text-align:center;  
+}
+
+#CalculatorDiv{
+    border:5px solid #4949b5;
+    background-color:#BaBaF1;
+    width:50%;
+    margin: 0 auto;
+    border-radius:10px;
+    color:#2e2ea3;
+}
+
+#Instructions, #Result, #DivError, #OperationWarning,#HistoryDiv{
+    padding:5px 3px 5px 3px;
+    text-align:right;
+    width:90%;
+    margin: 0 auto;
+    display:block;
+}
+
+textarea{
+    background-color:#BaBaF1;
+    color:#2e2ea3;
+    width:100%;
+    margin:0 auto;
+    display:block;
+}
+
+#Result, #Error{
+    border-color:none;
+    border-width:0px;
+}
+
+#Instructions{
+    color:#babaf1;
+    background-color:#4949b5;
+    border-radius:8px;
+}
+
+
+
+#Result{
+    background-color:transparent;
+    font-weight:bold;
+    font-size:large;    
+    color:#2e2ea3;
+}
+
+#OperationWarning, #HistoryDiv{
+    font-size:smaller;
+}
+
+#Buttons{
+    font-size:large;
+    background-color:#C88DBD;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+#Buttons div{
+    
+    text-align:center;
+    width:100%;
+    
+    /*margin:8px 5px 8px 5px;*/
+}
+
+.operator{
+    font-weight:bolder;
+    color:darkred;
+}
+#Buttons input{
+    width:22%;
+    border-radius:8px;
+    background-color:#babaf1;
+    color:#2e2ea3;
+}
+#DivError{
+    font-size:small;
+    color:red;
+    text-align:left;
+}

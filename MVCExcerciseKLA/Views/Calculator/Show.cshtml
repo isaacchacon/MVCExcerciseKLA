@@ -1,0 +1,122 @@
+﻿@model MVCExcerciseKLA.Models.Calculator
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Calculator</title>
+    <link type="text/css" rel="stylesheet" href="~/Calculator.css" />
+</head>
+<body>
+    <header>
+        Calculator Project
+    </header>
+    <div id="mainDiv"> 
+        <section id="explanation">
+            This is a basic Calculator Project that shows my working Knowledge of MVC.NET C# and other technologies.
+        </section>
+        <form action="Calculate" method="post">
+            <div id="CalculatorDiv">
+                <div id="HistoryDiv">
+                    History:
+                <textarea name="History" readonly ="readonly" >@Model.History</textarea>
+                </div>
+                <div><div id="OperationWarning">*Operations will be processed left to right:</div><input type="text" name="Instructions" id="Instructions" value="@Model.Instructions"/></div>
+                <div><input type="text" name="Result" id="Result" value="@Model.Result" readonly /></div>
+                <div id="DivError">@Model.Error @Html.ValidationSummary()</div>
+                <section id="Buttons">
+                    <div>
+                        <input type="button" value="C" class="operator" onclick="javascript: CalcArt.Instructions.value = '0'; CalcArt.Result.value = ''; CalcArt.Error.innerHTML = '';"/>
+                        <input type="button" value="/"  class="operator" onclick="javascript: CalcArt.AppendSign(this);" />
+                        <input type="button" value="*"  class="operator" onclick="javascript: CalcArt.AppendSign(this);" />
+                        <input type="button" value="-"  class="operator" onclick="javascript: CalcArt.AppendSign(this);" />
+                    </div>
+                    <div>
+                        <input type="button" value="7" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="8" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="9" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="+" class="operator"  onclick="javascript: CalcArt.AppendSign(this);" />
+                    </div>
+                    <div>
+                        <input type="button" value="4" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="5" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="6" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="+"  class="operator" onclick="javascript: CalcArt.AppendSign(this);" />
+                    </div>
+                    <div>
+                        <input type="button" value="1" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="2" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="3" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="submit" value="="  class="operator" />
+                    </div>
+                    <div>
+                        <input type="button" value="<-" class="operator" onclick="javascript: CalcArt.Erase();" />
+                        <input type="button" value="0" onclick="javascript: CalcArt.AppendNumber(this);" />
+                        <input type="button" value="." onclick="javascript: CalcArt.AppendPoint();" />
+                        <input type="submit" value="="  class="operator" />
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+
+        var CalcArt = new CalculatorArtifacts();
+        ///Encapsulate all logic and avoid global stuff.
+        function CalculatorArtifacts ()
+        {
+            this.Instructions = document.getElementById("Instructions");
+            this.Result = document.getElementById("Result");
+            this.Error = document.getElementById("DivError");
+            this.AppendSign = function (button) {
+                if (this.Result.value.length > 0 ) {
+                    
+                    this.Instructions.value = this.Result.value;
+                    this.Result.value = '';
+                    this.Error.innerHTML = '';
+                }
+                if (/\d+$/.test(this.Instructions.value)){
+                    this.Instructions.value = this.Instructions.value + button.value;
+                }
+            }
+            this.AppendNumber = function (button) {
+                if (this.Result.value.length > 0||this.Error.innerHTML.length>0) {
+                    this.Result.value = '';
+                    this.Instructions.value = '';
+                    this.Error.innerHTML = '';
+                }
+                if ((this.Instructions.value+"") == '0') {
+                    this.Instructions.value = button.value + "";
+                }
+                else {
+                    this.Instructions.value = this.Instructions.value + "" + button.value;
+                }
+            }
+            this.Erase = function(){
+                if (this.Instructions.value.length > 0) {
+                    this.Instructions.value = this.Instructions.value.substr(0, this.Instructions.value.length - 1)
+                    this.Result.value = '';
+                    this.Error.innerHTML = '';
+                }
+            }
+            this.AppendPoint = function () {
+                if (this.Result.value.length > 0 || this.Error.innerHTML.length > 0) {
+                    this.Result.value = '';
+                    this.Instructions.value = '0.';
+                    this.Error.innerHTML = '';
+                    return;
+                }
+                if(/^\d+$/.test(this.Instructions.value) || /[+\-\*/]\d*$/.test(this.Instructions.value)){
+                    this.Instructions.value = this.Instructions.value + ".";
+                }
+
+            }
+        }
+    </script>
+</body>
+</html>
